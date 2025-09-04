@@ -98,4 +98,9 @@ Handling the toggling of the checkboxes was particularly interesting.
 </div>
 ```
 
-"""this is practice"""
+MY NOTES 
+github is very helpful because it can be used to save progress and access projects at anytime even if my computer has errors.
+
+You can clone a repository by providing the Githubs URL as a parameter in git clone 
+
+you can make changes by using pull to get latest changes, make changes, Git commit, and push git command
