@@ -1,62 +1,66 @@
-# Your startup name here
+# ASAKA PHOTOS
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+A full-featured photography website for Asaka Photos (Destination Wedding & Editorial Photography).
+Specialty: Destination wedding and editorial photography
+Based: Utah, available worldwide
+Style: Documentary-style moments captured on film + digital
 
-
-> [!NOTE]
->  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
-
-> [!NOTE]
->  If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
 
 ## 🚀 Specification Deliverable
 
 > [!NOTE]
 >  Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
-
 ### Elevator pitch
 
-My idea for a website is to create a functioning website for the business me and my wife started. This website will eliminate current expenses that are charged through our website on pixieset. Our current booking sites take a 5% profit, which is way more than the cost of maintaining a website ourselves and not having to give up the profit. Overall, this website will manage transactions by utilizing paypal and venmo. It will have a database where users can login and book times which will reflect in an updated calandar that shows availability. 
+Asaka Photos is a destination wedding and editorial photography brand capturing authentic, documentary-style moments in both film and digital. This project creates a custom website that eliminates reliance on third-party booking platforms (like Pixieset, which takes a 5% cut). By managing our own booking, payments, and gallery delivery, we save costs, streamline the client experience, and give couples a beautiful, seamless way to book and relive their special day.
 
 ### Design
 
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ```mermaid
 sequenceDiagram
-    actor You
+    actor Client
     actor Website
-    You->>Website: Replace this with your design
+    Client->>Website: Browse portfolio (digital + film)
+    Client->>Website: Check availability calendar
+    Client->>Website: Book a session & pay (PayPal/Venmo)
+    Website->>Client: Confirm booking + email notification
+    Client->>Website: Login to view/download delivered galleries
+
 ```
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+Portfolio Showcase – Display curated galleries of wedding & editorial work (film + digital).
+
+Booking System – Clients can check real-time availability and reserve dates.
+
+Payment Integration – Secure transactions using PayPal and Venmo.
+
+Client Login & Galleries – Private client accounts for viewing and downloading delivered photos.
+
+Responsive Design – Optimized for mobile and desktop so clients can book from anywhere.
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** – Structure for portfolio, booking pages, and client galleries.
+
+- **CSS** – Clean, elegant styling that matches the Asaka Photos brand (minimal, modern aesthetic).
+
+- **React** – Dynamic components for portfolio navigation, calendar availability, and gallery viewing.
+
+- **Service** (Node/Express) – Backend service to handle bookings, payments, and gallery delivery.
+
+- **DB/Login** (PostgreSQL + JWT Auth) – Secure login for clients, store bookings, user data, and delivered gallery links.
+
+- **WebSocket** – Real-time booking updates (e.g., calendar instantly updates when a date is reserved).
 
 ## 🚀 AWS deliverable
 
