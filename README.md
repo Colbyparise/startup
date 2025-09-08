@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+My idea for a website is to create a functioning website for the business me and my wife started. This website will eliminate current expenses that are charged through our website on pixieset. Our current booking sites take a 5% profit, which is way more than the cost of maintaining a website ourselves and not having to give up the profit. Overall, this website will manage transactions by utilizing paypal and venmo. It will have a database where users can login and book times which will reflect in an updated calandar that shows availability. 
 
 ### Design
 
