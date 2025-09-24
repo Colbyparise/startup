@@ -49,8 +49,7 @@ p {
 
 .package {
   flex: 1;
-  min-width: 250px;       /* keeps them readable on small screens */
-   /* white overlay so text pops on textured bg */
+  min-width: 250px;
   padding: 15px;
   border-radius: 10px;
 }
