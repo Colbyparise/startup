@@ -1,0 +1,56 @@
+p {
+  color: black;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  width: 200px;
+  height: 80px;
+  margin: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.venmo {
+  background-color: #3D95CE; 
+}
+
+.paypal {
+  background: linear-gradient(135deg, #003087, #009CDE); 
+}
+
+.box:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hidden {
+  display: none;
+  margin-left: 10px;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.box:hover .hidden {
+  display: inline;
+}
+
+.packages {
+  display: flex;
+  gap: 20px;              /* space between cards */
+  flex-wrap: wrap;        /* wrap on smaller screens */
+  margin: 20px 0;
+}
+
+.package {
+  flex: 1;
+  min-width: 250px;       /* keeps them readable on small screens */
+   /* white overlay so text pops on textured bg */
+  padding: 15px;
+  border-radius: 10px;
+}
