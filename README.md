@@ -130,11 +130,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [X] **Proper HTML element usage** - I used HTML properly following the format
 - [X] **Links** - I made links so that we can navigate through the pages
 - [X] **Text** - I have text on my html pages
-- [X] **3rd party API placeholder** - This is on the homepage after the links.
+- [X] **3rd party API placeholder** - This is used for the venmo and paypal buttons
 - [X] **Images** - I added images to the galleries and the backgroud is an imported image. 
 - [X] **Login placeholder** - This part of the project is on the schedule page.
-- [x] **DB data placeholder** - This is on the homepage after the links.
-- [X] **WebSocket placeholder** - This is on the home page after the links.
+- [x] **DB data placeholder** - This will be added on to the calendar, when a spot is taken it will be crossed out in the calendar.
+- [X] **WebSocket placeholder** - I want dates to be crossed off in real time as people schedule a photoshoot. 
 
 ## 🚀 CSS deliverable
 
