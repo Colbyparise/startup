@@ -1,0 +1,177 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  background-color: #F9F9F7;
+  background-image: url('AdobeStock_320609690.jpg');
+  background-repeat: repeat;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header (Top Bar) */
+.top-bar {
+  background-color: black;
+  color: white; 
+  padding: 20px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border-bottom: 3px solid #444;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px;
+  background-color: #eee;
+  border-bottom: 2px solid #ccc;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+  color: #0077cc;
+  transform: scale(1.05);
+}
+
+/* Main Content */
+main {
+  padding: 20px;
+}
+
+/* Headings */
+h2 {
+  font-size: 28px;
+  margin: 20px 0 10px 20px;
+  border-left: 5px solid #0077cc;
+  padding-left: 10px;
+}
+
+h3 {
+  font-size: 22px;
+  margin: 15px 0 10px 20px;
+  color: #444;
+}
+
+h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* Paragraphs */
+p {
+  font-size: 16px;
+  margin: 15px 20px;
+}
+
+/* Package Layout */
+.packages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px 20px;
+}
+
+.package {
+  flex: 1 1 300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.package:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.package ul {
+  padding-left: 20px;
+}
+
+/* Payment Options */
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  width: 200px;
+  height: 80px;
+  margin: 20px auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.venmo {
+  background-color: #3D95CE; 
+}
+
+.paypal {
+  background: linear-gradient(135deg, #003087, #009CDE); 
+}
+
+.box:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 10px auto;
+}
+
+/* Footer */
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  margin-top: 40px;
+  border-top: 3px solid #444;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .packages {
+    flex-direction: column;
+  }
+
+  .box {
+    width: 100%;
+    max-width: 300px;
+  }
+}
