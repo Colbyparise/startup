@@ -1,33 +1,35 @@
-/* Reset */
+/* ===== Reset ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Header strip */
+/* ===== Header strip ===== */
 .top-bar {
   background-color: black;
   color: white;
   padding: 15px;
   text-align: center;
-  font-size: 24px;
+  font-size: 2rem;
   font-family: Arial, sans-serif;
   letter-spacing: 2px;
 }
 
-/* Navigation bar */
+/* ===== Navigation bar ===== */
 nav {
   background-color: #222;
   padding: 12px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 nav a {
   color: white;
   text-decoration: none;
-  margin: 0 20px;
-  font-size: 18px;
+  margin: 8px 20px;
+  font-size: 1.125rem;
   font-family: Arial, sans-serif;
   transition: color 0.3s ease;
 }
@@ -37,36 +39,39 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* Body */
+/* ===== Body ===== */
 body {
   background-color: #F9F9F7;
   background-image: url('AdobeStock_320609690.jpg');
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-size: cover;
-  margin: 0;
   font-family: Arial, sans-serif;
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Main container */
+/* ===== Main container ===== */
 main {
+  flex: 1;
   padding: 30px 20px;
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.9);
+  max-width: 900px;
+  margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.92);
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 
-/* Headings */
+/* ===== Headings ===== */
 h2 {
   margin-bottom: 20px;
-  font-size: 28px;
+  font-size: 1.75rem;
   text-align: center;
   color: #333;
 }
 
-/* Review cards */
+/* ===== Review cards ===== */
 .review {
   background-color: #fff;
   border-radius: 10px;
@@ -83,46 +88,92 @@ h2 {
 
 .review h3 {
   margin: 0 0 10px;
-  font-size: 20px;
+  font-size: 1.25rem;
   color: #333;
 }
 
 .review p {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5;
   color: #555;
 }
 
-/* Star ratings */
+/* ===== Star ratings ===== */
 .stars {
   color: gold;
-  font-size: 18px;
+  font-size: 1.125rem;
   margin-bottom: 10px;
 }
 
-/* Footer */
+/* ===== Footer ===== */
 footer {
   background-color: #222;
   color: white;
   text-align: center;
   padding: 15px;
-  font-size: 14px;
-  margin-top: 40px;
+  font-size: 0.9rem;
+  margin-top: auto;
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
+
+/* Tablet */
 @media (max-width: 768px) {
+  .top-bar {
+    font-size: 1.5rem;
+    padding: 12px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
   nav a {
-    display: inline-block;
-    margin: 8px;
-    font-size: 16px;
+    margin: 6px 0;
+    font-size: 1rem;
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .review p {
-    font-size: 15px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .top-bar {
+    font-size: 1.25rem;
+    padding: 10px;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+    margin: 4px 0;
+  }
+
+  main {
+    padding: 20px 12px;
+    margin: 10px;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .review h3 {
+    font-size: 1.1rem;
+  }
+
+  .review p {
+    font-size: 0.9rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 10px;
   }
 }
