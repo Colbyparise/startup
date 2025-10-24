@@ -35,7 +35,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #ffb347; /* subtle highlight */
+  color: #ffb347;
   text-decoration: underline;
 }
 
@@ -170,7 +170,7 @@ footer {
   }
 
   .gallery-grid {
-    grid-template-columns: 1fr; /* single column gallery */
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
