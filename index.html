@@ -1,118 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asaka Photography</title>
-  <style>
-    .top-bar {
-      background-color: black;
-      color: white; 
-      padding: 15px;
-      text-align: center;
-      font-size: 24px;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background-color: #F9F9F7;
-      background-image: url('AdobeStock_320609690.jpg');
-      background-repeat: repeat;
-      background-size: cover;
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 15px;
-      background-color: #eee;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-    }
-
-    p {
-      color: black;
-      padding: 0 20px;
-    }
-
-    h2, h3 {
-      padding: 0 20px;
-    }
-
-    .placeholder {
-      margin: 10px 20px;
-      padding: 10px;
-      background-color: #f0f0f0;
-      border-radius: 8px;
-    }
-
-    .packages {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 0 20px;
-    }
-
-    .package {
-      flex: 1 1 300px;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .package h4 {
-      margin-top: 0;
-      color: #333;
-    }
-
-    .box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      font-weight: bold;
-      color: white;
-      border-radius: 10px;
-      width: 200px;
-      height: 80px;
-      margin: 20px auto;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      cursor: pointer;
-    }
-
-    .venmo {
-      background-color: #3D95CE; 
-    }
-
-    .paypal {
-      background: linear-gradient(135deg, #003087, #009CDE); 
-    }
-
-    .box:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    .hidden {
-      display: none;
-      margin-left: 10px;
-      font-size: 1rem;
-      font-weight: normal;
-    }
-
-    .box:hover .hidden {
-      display: inline;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Top black strip -->
@@ -120,6 +12,7 @@
     ASAKA PHOTOGRAPHY
   </div>
 
+  <!-- Navigation bar -->
   <nav>
     <a href="index.html">Home</a>
     <a href="schedule.html">Schedule</a>
@@ -127,83 +20,92 @@
     <a href="galleries.html">Galleries</a>
   </nav>
 
+  <main>
+    <p>Check out my code on 
+      <a href="https://github.com/Colbyparise/startup" target="_blank">GitHub</a>.
+    </p>
 
-  <h2>Pricing</h2>
+    <h2>Pricing</h2>
 
-  <h3>In-State Weddings</h3>
-  <div class="packages">
-    <div class="package">
-      <h4>$2000 – 4 hours of coverage</h4>
-      <ul>
-        <li>Gallery of carefully curated 300+ images</li>
-        <li>Complimentary timeline composition call</li>
-        <li>72 hour sneak peeks</li>
-        <li>6 week turnaround time</li>
-      </ul>
+    <h3>In-State Weddings</h3>
+    <div class="packages">
+      <div class="package">
+        <h4>$2000 – 4 hours of coverage</h4>
+        <ul>
+          <li>Gallery of 300+ curated images</li>
+          <li>Timeline composition call</li>
+          <li>72-hour sneak peeks</li>
+          <li>6-week turnaround time</li>
+        </ul>
+      </div>
+
+      <div class="package">
+        <h4>$2500 – 6 hours of coverage</h4>
+        <ul>
+          <li>Gallery of 450+ curated images</li>
+          <li>Timeline composition call</li>
+          <li>Bridal session</li>
+          <li>72-hour sneak peeks</li>
+          <li>6-week turnaround time</li>
+        </ul>
+      </div>
+
+      <div class="package">
+        <h4>$3000 – 8 hours of coverage</h4>
+        <ul>
+          <li>Gallery of 600+ curated images</li>
+          <li>Timeline composition call</li>
+          <li>Bridal + engagement sessions</li>
+          <li>72-hour sneak peeks</li>
+          <li>6-week turnaround time</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="package">
-      <h4>$2500 – 6 hours of coverage</h4>
-      <ul>
-        <li>Gallery of carefully curated 450+ images</li>
-        <li>Complimentary timeline composition call</li>
-        <li>Complimentary bridal session</li>
-        <li>72 hour sneak peeks</li>
-        <li>6 week turnaround time</li>
-      </ul>
+    <h3>Out-of-State Weddings</h3>
+    <div class="packages">
+      <div class="package">
+        <h4>$2000 – 4 hours of coverage</h4>
+        <ul>
+          <li>Gallery of 300+ curated images</li>
+          <li>Timeline composition call</li>
+          <li>72-hour sneak peeks</li>
+          <li>6-week turnaround time</li>
+        </ul>
+      </div>
+
+      <div class="package">
+        <h4>$2500 – 6 hours of coverage</h4>
+        <ul>
+          <li>Gallery of 450+ curated images</li>
+          <li>Timeline composition call</li>
+          <li>Bridal session</li>
+          <li>72-hour sneak peeks</li>
+          <li>6-week turnaround time</li>
+        </ul>
+      </div>
+
+      <div class="package">
+        <h4>$3000 – 8 hours of coverage</h4>
+        <ul>
+          <li>Gallery of 600+ curated images</li>
+          <li>Timeline composition call</li>
+          <li>Bridal + engagement sessions</li>
+          <li>72-hour sneak peeks</li>
+          <li>6-week turnaround time</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="package">
-      <h4>$3000 – 8 hours of coverage</h4>
-      <ul>
-        <li>Gallery of carefully curated 600+ images</li>
-        <li>Complimentary timeline composition call</li>
-        <li>Complimentary bridal session</li>
-        <li>Complimentary engagement session</li>
-        <li>72 hour sneak peeks</li>
-        <li>6 week turnaround time</li>
-      </ul>
+    <h3>Payment Options</h3>
+    <div class="payment">
+      <div class="box venmo">Venmo</div>
+      <div class="box paypal">PayPal</div>
     </div>
-  </div>
+  </main>
 
-  <h3>Out-of-State Weddings</h3>
-  <div class="packages">
-    <div class="package">
-      <h4>$2000 – 4 hours of coverage</h4>
-      <ul>
-        <li>Gallery of carefully curated 300+ images</li>
-        <li>Complimentary timeline composition call</li>
-        <li>72 hour sneak peeks</li>
-        <li>6 week turnaround time</li>
-      </ul>
-    </div>
-
-    <div class="package">
-      <h4>$2500 – 6 hours of coverage</h4>
-      <ul>
-        <li>Gallery of carefully curated 450+ images</li>
-        <li>Complimentary timeline composition call</li>
-        <li>Complimentary bridal session</li>
-        <li>72 hour sneak peeks</li>
-        <li>6 week turnaround time</li>
-      </ul>
-    </div>
-
-    <div class="package">
-      <h4>$3000 – 8 hours of coverage</h4>
-      <ul>
-        <li>Gallery of carefully curated 600+ images</li>
-        <li>Complimentary timeline composition call</li>
-        <li>Complimentary bridal session</li>
-        <li>Complimentary engagement session</li>
-        <li>72 hour sneak peeks</li>
-        <li>6 week turnaround time</li>
-      </ul>
-    </div>
-  </div>
-
-  <h3>Payment Options</h3>
-  <div class="box venmo">V</div>
-  <div class="box paypal">PayPal</div>
+  <footer>
+    &copy; 2025 Asaka Photography. All Rights Reserved.
+  </footer>
 </body>
 </html>
