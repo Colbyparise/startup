@@ -151,8 +151,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
+- [X] **Bundled using Vite** - I ran npm create vite@latest . -- --template react
+Which initialized a React project configured for Vite in my existing directory. It created the file vite.config.js, and connected my index.html to the entry point src/main.jsx.
+- [X] **Components** - I added an about.jsx, login.jsx, play.jsx, scores.jsx and App.jsx to match the previous html and css files. These can be found mostly in the src folder.
 - [ ] **Router** - I did not complete this part of the deliverable.
 
 ## 🚀 React part 2: Reactivity deliverable
