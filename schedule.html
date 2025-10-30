@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Schedule – Asaka Photography</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule – Asaka Photos</title>
+  <link rel="stylesheet" href="schedule.css">
 </head>
 <body>
-  <!-- Black header -->
-  <header class="top-bar">ASAKA PHOTOGRAPHY</header>
+  <header class="top-bar">ASAKA PHOTOS</header>
 
-  <!-- Navigation bar -->
   <nav class="navbar">
     <a href="index.html">Home</a>
     <a href="schedule.html" class="active">Schedule</a>
@@ -19,37 +17,40 @@
   </nav>
 
   <main>
-    <h2>Schedule a Session</h2>
-    <p>Fill out the form below to request a photoshoot date. I’ll get back to you within 24 hours to confirm availability.</p>
+    <h2>Inquire Here</h2>
+    <p>I can't wait to connect with you. Thank you so much for considering me as your photographer!</p>
+    <p2> Please expect a response within 1-2 business days!</p2>
 
     <form class="schedule-form">
       <label for="name">Full Name:</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" required>
 
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" name="email" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
 
       <label for="date">Preferred Date:</label>
-      <input type="date" id="date" name="date" required />
+      <input type="date" id="date" required>
 
       <label for="session-type">Session Type:</label>
-      <select id="session-type" name="session-type" required>
+      <select id="session-type" required>
         <option value="">Select...</option>
-        <option value="wedding">Wedding</option>
-        <option value="engagement">Engagement</option>
-        <option value="portrait">Portrait</option>
-        <option value="other">Other</option>
+        <option value="wedding">Wedding Day Photo Coverage</option>
+        <option value="weekend">Wedding Weekened Photo Coverage</option>
+        <option value="elopement">Elopement</option>
+        <option value="engagement">Engagement Photos</option>
+        <option value="bridals">Bridals (offered only in Utah)</option>
+        <option value="other">Other</otion>
       </select>
+    <label for="other">Other (please specify):</label>
+      <input type="text" id=other > 
 
       <label for="message">Additional Details:</label>
-      <textarea id="message" name="message" rows="4" placeholder="Tell me more about your vision..."></textarea>
+      <textarea id="message" rows="4" placeholder="Tell me more..."></textarea>
 
       <button type="submit">Submit Request</button>
     </form>
   </main>
 
-  <footer>
-    &copy; 2025 Asaka Photography. All Rights Reserved.
-  </footer>
+  <footer>&copy; 2025 Asaka Photography</footer>
 </body>
 </html>

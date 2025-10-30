@@ -1,4 +1,5 @@
-/* ====== General Reset ====== */
+@import url('https://fonts.googleapis.com/css2?family=Garamond&family=Great+Vibes&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,8 +12,8 @@
   color: white;
   padding: 15px;
   text-align: center;
-  font-size: 2rem; /* scales better */
-  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  font-family: 'Great Vibes', cursive;
 }
 
 /* ====== Navigation ====== */
@@ -44,8 +45,7 @@ body {
   background-image: url('AdobeStock_320609690.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Garamond', serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -58,41 +58,46 @@ main {
 }
 
 h2 {
+  font-family: 'Great Vibes', cursive;
   margin: 20px 0;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 
-/* ====== Calendar Table ====== */
-.calendar {
-  margin: 30px auto;
-  border-collapse: collapse;
-  width: 90%;
-  max-width: 700px;
+/* ====== Form Styling ====== */
+.schedule-form {
+  max-width: 450px;
+  margin: 20px auto;
+  text-align: left;
+  padding: 20px;
+  border-radius: 8px;
 }
 
-.calendar th,
-.calendar td {
-  border: 1px solid #ccc;
+.schedule-form label {
+  font-weight: bold;
+  margin: 10px 0 5px;
+  display: block;
+}
+
+.schedule-form input,
+.schedule-form select,
+.schedule-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.schedule-form button {
+  width: 100%;
   padding: 12px;
-  text-align: center;
-  font-size: 1rem;
-}
-
-.calendar th {
-  background-color: #222;
+  background: black;
   color: white;
-}
-
-.calendar td:hover {
-  background-color: #f0f0f0;
+  border: none;
+  font-size: 1rem;
   cursor: pointer;
 }
 
-/* ====== Note Section ====== */
-.note {
-  margin-top: 20px;
-  font-size: 1.125rem;
-  color: #333;
+.schedule-form button:hover {
+  background-color: #333;
 }
 
 /* ====== Footer ====== */
@@ -103,53 +108,4 @@ footer {
   padding: 15px;
   font-size: 0.9rem;
   margin-top: auto;
-}
-
-/* ====== Responsive Layout ====== */
-@media (max-width: 768px) {
-  .top-bar {
-    font-size: 1.5rem;
-    padding: 10px;
-  }
-
-  nav {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav a {
-    margin: 8px 0;
-    font-size: 1rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .calendar {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-
-  .calendar th, .calendar td {
-    padding: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .top-bar {
-    font-size: 1.2rem;
-  }
-
-  nav a {
-    font-size: 0.9rem;
-  }
-
-  h2 {
-    font-size: 1.25rem;
-  }
-
-  .note {
-    font-size: 1rem;
-  }
 }
