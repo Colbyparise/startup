@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Schedule } from "./pages/Schedule";
-import { Reviews } from "./pages/Reviews";
-import { Galleries } from "./pages/Galleries";
+import Home from "./pages/Home";
+import Schedule from "./pages/Schedule";
+import Reviews from "./pages/Reviews";
+import Galleries from "./pages/Galleries";
+import "./App.css";
 import "./index.css";
 
 export default function App() {

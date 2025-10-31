@@ -1,19 +1,9 @@
 import React from "react";
 import "./Galleries.css";
 
-export function Galleries() {
+export default function Galleries() {
   return (
     <div className="page-wrapper">
-      {/* Top black strip */}
-      <div className="top-bar">ASAKA PHOTOGRAPHY</div>
-
-      {/* Navigation bar */}
-      <nav>
-        <a href="/index.html">Home</a>
-        <a href="/schedule.html">Schedule</a>
-        <a href="/reviews.html">Reviews</a>
-        <a href="/galleries.html">Galleries</a>
-      </nav>
 
       <main>
         <h2>Photo Galleries</h2>
