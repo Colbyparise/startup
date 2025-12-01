@@ -153,15 +153,14 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [X] **Bundled using Vite** - I ran npm create vite@latest . -- --template react
 Which initialized a React project configured for Vite in my existing directory. It created the file vite.config.js, and connected my index.html to the entry point src/main.jsx.
-- [X] **Components** - I added an about.jsx, login.jsx, play.jsx, scores.jsx and App.jsx to match the previous html and css files. These can be found mostly in the src folder.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [X] **Components** - I added an Home.jsx, Schedule.jsx, Reviews.jsx, Galleris.jsx and used App.jsx to match the previous html and css files. Each component imports a css file and uses the same layout structure. These can be found in asaka-react/src/pages.
+- [X] **Router** - This can be found in asaka-react/src/App.jsx. I used react router to allow navigation between pages without reloading. 
 
 ## 🚀 React part 2: Reactivity deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+For this deliverable I used JavaScript and React so that the application completely works for a single user.
+- [X] **All functionality implemented or mocked out** - The scheduling and availabilty is saved into local storage. 
+- [X] **Hooks** -Used useState and useEffect on the scheduling page. 
 
 ## 🚀 Service deliverable
 
