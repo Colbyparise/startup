@@ -158,10 +158,9 @@ Which initialized a React project configured for Vite in my existing directory. 
 
 ## 🚀 React part 2: Reactivity deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+For this deliverable I used JavaScript and React so that the application completely works for a single user.
+- [X] **All functionality implemented or mocked out** - The scheduling and availabilty is saved into local storage. 
+- [X] **Hooks** -Used useState and useEffect on the scheduling page. 
 
 ## 🚀 Service deliverable
 
