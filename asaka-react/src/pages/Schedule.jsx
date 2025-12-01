@@ -43,7 +43,6 @@ export default function Schedule() {
         </form>
       </main>
 
-      <footer>&copy; 2025 Asaka Photography</footer>
     </div>
   );
 }

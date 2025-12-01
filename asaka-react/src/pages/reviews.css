@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
 /* ===== Reset ===== */
 * {
   margin: 0;
@@ -12,7 +14,7 @@
   padding: 15px;
   text-align: center;
   font-size: 2rem;
-  font-family: Arial, sans-serif;
+  font-family: "Dancing Script", cursive;
   letter-spacing: 2px;
 }
 

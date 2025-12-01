@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 
 export default function Home() {
+  const [favorite, setFavorite] = useState(null);
+
+  // Load saved favorite on page load
+  useEffect(() => {
+    const saved = localStorage.getItem("favoritePackage");
+    if (saved) {
+      setFavorite(saved);
+    }
+  }, []);
+
+  function handleFavorite(name) {
+    setFavorite(name);
+    localStorage.setItem("favoritePackage", name);
+  }
+
+  const packages = [
+    {
+      name: "$2000 – 4 hours",
+      details: ["300+ edited images", "Timeline call", "72-hour sneak peeks", "6-week turnaround"]
+    },
+    {
+      name: "$2500 – 6 hours",
+      details: ["450+ edited images", "Bridal session", "72-hour sneak peeks", "6-week turnaround"]
+    },
+    {
+      name: "$3000 – 8 hours",
+      details: ["600+ edited images", "Bridal + engagement", "72-hour sneak peeks", "6-week turnaround"]
+    }
+  ];
+
   return (
     <div className="page-wrapper">
-
       <main>
         <h2>Wedding Photography Pricing</h2>
 
@@ -18,36 +47,33 @@ export default function Home() {
         <h3>In-State Weddings</h3>
 
         <div className="packages">
-          <div className="package">
-            <h4>$2000 – 4 hours</h4>
-            <ul>
-              <li>300+ edited images</li>
-              <li>Timeline call</li>
-              <li>72-hour sneak peeks</li>
-              <li>6-week turnaround</li>
-            </ul>
-          </div>
+          {packages.map((pkg) => (
+            <div className="package" key={pkg.name}>
+              <h4>{pkg.name}</h4>
 
-          <div className="package">
-            <h4>$2500 – 6 hours</h4>
-            <ul>
-              <li>450+ edited images</li>
-              <li>Bridal session</li>
-              <li>72-hour sneak peeks</li>
-              <li>6-week turnaround</li>
-            </ul>
-          </div>
+              <ul>
+                {pkg.details.map((d) => (
+                  <li key={d}>{d}</li>
+                ))}
+              </ul>
 
-          <div className="package">
-            <h4>$3000 – 8 hours</h4>
-            <ul>
-              <li>600+ edited images</li>
-              <li>Bridal + engagement</li>
-              <li>72-hour sneak peeks</li>
-              <li>6-week turnaround</li>
-            </ul>
-          </div>
+              <button
+                className="fav-btn"
+                onClick={() => handleFavorite(pkg.name)}
+              >
+                {favorite === pkg.name ? "★ Favorited" : "☆ Favorite"}
+              </button>
+            </div>
+          ))}
         </div>
+
+        {favorite && (
+          <div className="favorite-display">
+            <p>
+              ⭐ Your favorite package is: <strong>{favorite}</strong>
+            </p>
+          </div>
+        )}
 
         <h3>Payment Options</h3>
 
@@ -56,8 +82,8 @@ export default function Home() {
           <div className="box paypal">PayPal</div>
         </div>
       </main>
-
-      <footer>© 2025 Asaka Photography. All Rights Reserved.</footer>
+      
     </div>
   );
 }
+
