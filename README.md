@@ -68,54 +68,6 @@ I am going to use the required technologies in the following ways.
 
 - **WebSocket** – Real-time booking updates (e.g., calendar instantly updates when a date is reserved).
 
-## Deployment instructions
-
-1. Clone this repository to your development environment.  
-```sh
-   git clone https://github.com/yourusername/asaka-photos.git
-   cd asaka-photos
-   ```
-
-3. Create a `.env` file in the root of the project with the following values (replace with your own).  
-   ```sh
-   PORT=4000
-   DATABASE_URL=postgres://username:password@hostname:5432/asakaphotos
-   JWT_SECRET=your_secret_key
-   PAYPAL_CLIENT_ID=your_paypal_client_id
-   PAYPAL_SECRET=your_paypal_secret
-   ```
-
-5. NPM install both the frontend and backend dependencies.  
-```sh
-   # Backend
-   npm install
-   # Frontend
-   cd ui
-   npm install
-   cd ..
-```
-
-5. Database setup (make sure PostgreSQL is running, create database, run migrations).  
-```sh
-   createdb asakaphotos
-   npm run migrate
-```
-6. Run the application locally.  
-```sh
-   # Start backend
-   npm run dev
-   # In another terminal, start frontend
-   cd ui
-   npm start
-```
-7. Deploy to production (optional) using the deploy script.  
-```sh
-   ./deploy.sh -k ~/keys/yourkey.pem -h yourdomainnamehere.com
-```
-8. Verify that the application is running on the domain.  
-```sh
-   curl https://yourdomainnamehere.com
-```
 ## 🚀 AWS deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
