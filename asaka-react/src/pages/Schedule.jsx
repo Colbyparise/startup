@@ -20,7 +20,7 @@ export default function Schedule() {
   useEffect(() => {
     const interval = setInterval(() => {
       const randomUser = `Visitor-${Math.floor(Math.random() * 1000)}`;
-      setLiveMessage(` ${randomUser} just viewed the Schedule page`);
+      setLiveMessage(`👋 ${randomUser} just viewed the Schedule page`);
     }, 5000);
 
     return () => clearInterval(interval);
