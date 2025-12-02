@@ -158,9 +158,9 @@ Which initialized a React project configured for Vite in my existing directory. 
 
 ## 🚀 React part 2: Reactivity deliverable
 
-For this deliverable I used JavaScript and React so that the application completely works for a single user.
+For this deliverable I used JavaScript and React so that the application completely works for a single user. This is mostly done in the connect tab where a user is able to fill out their request and the day will be blocked out in the calendar. 
 - [X] **All functionality implemented or mocked out** - The scheduling and availabilty is saved into local storage. 
-- [X] **Hooks** -Used useState and useEffect on the scheduling page. 
+- [X] **Hooks** -Used useState and useEffect can be found on the connect page. 
 
 ## 🚀 Service deliverable
 
