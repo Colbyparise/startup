@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
-import "../App.css";
+import "./Schedule.css";
 
 export default function Schedule() {
-  // ===== React State =====
   const [formData, setFormData] = useState({
     name: "",
+    pname: "",
     email: "",
+    phone: "",
+    insta: "",
+    venue: "",
+    investment: "",
+    referral: "",
     date: "",
     type: "",
     other: "",
     message: "",
+    vision: "",
   });
 
-  const [status, setStatus] = useState(""); // mock server response
-  const [liveMessage, setLiveMessage] = useState(null); // mock websocket
+  const [status, setStatus] = useState("");
+  const [liveMessage, setLiveMessage] = useState(null);
   const [savedName, setSavedName] = useState(localStorage.getItem("userName"));
 
-  // ===== Mock WebSocket using setInterval =====
   useEffect(() => {
     const interval = setInterval(() => {
       const randomUser = `Visitor-${Math.floor(Math.random() * 1000)}`;
@@ -26,18 +31,15 @@ export default function Schedule() {
     return () => clearInterval(interval);
   }, []);
 
-  // ===== Handle Form Changes =====
   function updateField(e) {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   }
 
-  // ===== Mock Submit (simulating an API call) =====
   function submitForm(e) {
     e.preventDefault();
     localStorage.setItem("userName", formData.name);
     setSavedName(formData.name);
 
-    // Simulated backend response
     setStatus("Sending...");
     setTimeout(() => {
       setStatus("Your request has been submitted! (mocked backend)");
@@ -45,40 +47,49 @@ export default function Schedule() {
   }
 
   return (
-    <div>
+    <div className="schedule-page">
+
+      {/* ===== Header ===== */}
+      <header className="top-header">
+        <div className="logo">
+          <span className="logo-cursive">Asaka</span> Photos
+        </div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/galleries">Portfolio</a>
+          <a href="/schedule">Connect</a>
+          <a href="/reviews">Reviews</a>
+        </nav>
+      </header>
+
       <main>
         <h2>Inquire Here</h2>
 
         <p>I can't wait to connect with you. Thank you so much for considering me as your photographer!</p>
         <p>Please expect a response within 1–2 business days!</p>
 
-        {/* ===== Requirement: Name + GitHub Link ===== */}
-        <p style={{ marginTop: "10px", fontWeight: "bold" }}>
-          Developer: Colby Parise —  
-          <a href="https://github.com/yourGitHubHere" target="_blank" rel="noreferrer">
-            My GitHub
-          </a>
-        </p>
-
-        {/* ===== Live WebSocket Mock ===== */}
         {liveMessage && (
-          <div style={{ background: "#eee", padding: "10px", marginTop: "15px" }}>
-            {liveMessage}
-          </div>
+          <p className="live-message">{liveMessage}</p>
         )}
 
-        {/* ===== Form ===== */}
         <form className="schedule-form" onSubmit={submitForm}>
-          <label htmlFor="name">Full Name:</label>
+
+          <label htmlFor="name">Full Name *</label>
           <input id="name" value={formData.name} onChange={updateField} required />
 
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="pname">Partner's Full Name *</label>
+          <input id="pname" value={formData.pname} onChange={updateField} required />
+
+          <label htmlFor="email">Email *</label>
           <input id="email" type="email" value={formData.email} onChange={updateField} required />
 
-          <label htmlFor="date">Preferred Date:</label>
-          <input id="date" type="date" value={formData.date} onChange={updateField} required />
+          <label htmlFor="phone">Phone Number *</label>
+          <input id="phone" value={formData.phone} onChange={updateField} required />
 
-          <label htmlFor="type">Session Type:</label>
+          <label htmlFor="insta">Instagram Handle</label>
+          <input id="insta" value={formData.insta} onChange={updateField} required />
+
+          <label htmlFor="type">Session Type *</label>
           <select id="type" value={formData.type} onChange={updateField} required>
             <option value="">Select...</option>
             <option value="wedding">Wedding Day Photo Coverage</option>
@@ -89,6 +100,21 @@ export default function Schedule() {
             <option value="other">Other</option>
           </select>
 
+          <label htmlFor="date">Event Date *</label>
+          <input id="date" type="date" value={formData.date} onChange={updateField} required />
+
+          <label htmlFor="venue">Location & Venue *</label>
+          <input id="venue" value={formData.venue} onChange={updateField} required />
+
+          <label htmlFor="investment">Photography Investment Range *</label>
+          <input id="investment" value={formData.investment} onChange={updateField} required />
+
+          <label htmlFor="referral">How did you hear about me? *</label>
+          <input id="referral" value={formData.referral} onChange={updateField} required />
+
+          <label htmlFor="vision">Mood Board/Inspiration/Vision</label>
+          <input id="vision" value={formData.vision} onChange={updateField} required />
+
           {formData.type === "other" && (
             <>
               <label htmlFor="other">Other (please specify):</label>
@@ -96,25 +122,14 @@ export default function Schedule() {
             </>
           )}
 
-          <label htmlFor="message">Additional Details:</label>
+          <label htmlFor="message">Message</label>
           <textarea id="message" rows="4" value={formData.message} onChange={updateField} />
 
           <button type="submit">Submit Request</button>
         </form>
 
-        {/* ===== Mock Server Response ===== */}
-        {status && (
-          <p style={{ marginTop: "20px", color: "green", fontWeight: "bold" }}>
-            {status}
-          </p>
-        )}
-
-        {/* ===== LocalStorage Output ===== */}
-        {savedName && (
-          <p style={{ marginTop: "10px" }}>
-            Welcome back, <strong>{savedName}</strong>! (Loaded from localStorage)
-          </p>
-        )}
+        {status && <p className="status-message">{status}</p>}
+        {savedName && <p className="welcome-message">Welcome back, <strong>{savedName}</strong>!</p>}
       </main>
     </div>
   );

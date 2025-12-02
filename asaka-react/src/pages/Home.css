@@ -1,161 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.top-bar {
-  background-color: black;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  font-size: 2rem;
-  letter-spacing: 2px;
+/* GLOBAL */
+body {
+  background-color: #F3E8D0; /* creme background */
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  background-color: transparent;
+}
+
+.logo {
+  font-size: 2.5rem;
+  color: black;
+}
+
+.logo-cursive {
   font-family: "Dancing Script", cursive;
 }
 
-.fav-btn {
-  margin-top: 15px;
-  padding: 10px 15px;
-  font-size: 0.9rem;
-  border-radius: 8px;
-  border: none;
-  background-color: #ffd27f;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.fav-btn:hover {
-  background-color: #ffbf4d;
-}
-
-.favorite-display {
-  text-align: center;
-  background: #fff3d1;
-  padding: 15px;
-  margin-top: 25px;
-  border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-}
-
-
+/* NAVIGATION */
 nav {
-  background-color: #222;
-  padding: 12px;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  gap: 25px;
 }
 
 nav a {
-  color: white;
   text-decoration: none;
-  margin: 8px 20px;
-  font-size: 1.125rem;
-  font-family: Arial, sans-serif;
-  transition: color 0.3s ease;
+  color: black;
+  font-weight: bold;
 }
 
 nav a:hover {
-  color: #ffb347;
-}
-
-body {
-  background-color: #F9F9F7;
-  background-image: url('AdobeStock_320609690.jpg');
-  background-size: cover;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-  background-color: rgba(255, 255, 255, 0.92);
-  max-width: 900px;
-  margin: 25px auto;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-}
-
-h2, h3 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.intro {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.intro a {
-  color: #0073e6;
   text-decoration: underline;
+  color: #0073e6;
+}
+/* Keep your existing .home-photo exactly as-is */
+.home-photo {
+  max-width: 600px;
+  width: 90%;
+  height: auto;
+  border-radius: 0;
 }
 
-.packages {
+/* Photo row stays the same width + size */
+.photo-row {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  gap: 0; /* no gap between photos */
 }
 
-.package {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  width: 260px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.package h4 {
-  font-size: 1.125rem;
-  margin-bottom: 10px;
-}
-
-.package ul {
-  list-style-type: disc;
-  margin-left: 20px;
-}
-
-.payment {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  gap: 20px;
-}
-
-.box {
-  padding: 18px 32px;
-  border-radius: 10px;
-  font-weight: bold;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-}
-
-.venmo {
-  background-color: #3D95CE;
-  color: white;
-}
-
-.paypal {
-  background-color: #FFC439;
-  color: #111;
-}
-
-footer {
-  background-color: #222;
-  color: white;
-  padding: 15px;
+/* Centered text over BOTH photos */
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  font-size: 0.9rem;
-  margin-top: auto;
+  z-index: 10;
+
+  color: white;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
-@media (max-width: 768px) {
-  .package {
-    width: 100%;
-  }
+.center-text h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.center-text h2 {
+  font-size: 1.2rem;
+  margin-top: 6px;
+  font-weight: 400;
+  letter-spacing: 1px;
 }

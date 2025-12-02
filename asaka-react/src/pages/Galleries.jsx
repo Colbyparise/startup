@@ -3,7 +3,20 @@ import "./Galleries.css";
 
 export default function Galleries() {
   return (
-    <div className="page-wrapper">
+    <div className="galleries-page">
+
+      {/* ===== Header ===== */}
+      <header className="top-header">
+        <div className="logo">
+          <span className="logo-cursive">Asaka</span> Photos
+        </div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/galleries">Portfolio</a>
+          <a href="/schedule">Connect</a>
+          <a href="/reviews">Reviews</a>
+        </nav>
+      </header>
 
       <main>
         <h2>Photo Galleries</h2>

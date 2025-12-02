@@ -1,9 +1,23 @@
 import React from "react";
-import "../App.css";
+import "./Reviews.css";
 
 export default function Reviews() {
   return (
-    <div>
+    <div className="reviews-page">
+
+      {/* ===== Header ===== */}
+      <header className="top-header">
+        <div className="logo">
+          <span className="logo-cursive">Asaka</span> Photos
+        </div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/galleries">Portfolio</a>
+          <a href="/schedule">Connect</a>
+          <a href="/reviews">Reviews</a>
+        </nav>
+      </header>
+
       <main>
         <h2>Client Reviews</h2>
 
@@ -47,7 +61,6 @@ export default function Reviews() {
         </div>
       </main>
 
-      <footer>&copy; 2025 Asaka Photography</footer>
     </div>
   );
 }
