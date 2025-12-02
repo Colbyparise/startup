@@ -110,21 +110,20 @@ Which initialized a React project configured for Vite in my existing directory. 
 
 ## 🚀 React part 2: Reactivity deliverable
 
-For this deliverable I used JavaScript and React so that the application completely works for a single user. This is mostly done in the connect tab where a user is able to fill out their request and the day will be blocked out in the calendar. 
+For this deliverable I used JavaScript and React so that the application completely works for a single user. This is mostly done in the connect tab(schedule.jsx) where a user is able to fill out their request and the day will be blocked out in the calendar. 
 - [X] **All functionality implemented or mocked out** - The scheduling and availabilty is saved into local storage. 
 - [X] **Hooks** -Used useState and useEffect can be found on the connect page. 
 
 ## 🚀 Service deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I implemented backend features to support the frontend functionality.  
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - This is done in index.js
 - [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
+- [X] **Calls to third party endpoints** - This is done at the bottom of the home page. Code is found in home.jsx where i fetch https://api.quotable.io/random 
 - [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
 - [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
-
+- [X] **Supports registration, login, logout, and restricted endpoint** - This is used in the schedule page and is supported by api.js in src/services and index.js in service.
 
 ## 🚀 DB deliverable
 
