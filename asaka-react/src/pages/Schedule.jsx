@@ -54,6 +54,7 @@ export default function Schedule() {
   const [liveMessage, setLiveMessage] = useState(null);
   const [savedName, setSavedName] = useState(localStorage.getItem("userName") || "");
   const [bookedDates, setBookedDates] = useState([]);
+  
 
   // Live visitor messages
   useEffect(() => {
@@ -64,7 +65,6 @@ export default function Schedule() {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch booked dates from backend on load
   useEffect(() => {
     async function fetchDates() {
       try {

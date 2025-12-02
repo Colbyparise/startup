@@ -4,7 +4,8 @@ import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 
 const app = express();
-const port = process.argv[2] || 4000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
+
 
 app.use(express.json());
 app.use(cookieParser());
@@ -55,5 +56,29 @@ app.get("/api/bookings", (req, res) => {
   const bookedDates = bookings.map(b => b.date);
   res.json(bookedDates);
 });
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.get("/api/quote", (req, res) => {
+  const quotes = [
+    "Creativity takes courage.",
+    "Photography is the story I fail to put into words.",
+    "A picture is a poem without words.",
+    "The best camera is the one you have with you.",
+    "Art is not what you see, but what you make others see."
+  ];
+
+  const random = quotes[Math.floor(Math.random() * quotes.length)];
+
+  res.json({ content: random });
+});
+
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 
 app.listen(port, () => console.log(`Backend service running on port ${port}`));

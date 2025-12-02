@@ -1,19 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* GLOBAL */
 body {
-  background-color: #F3E8D0; /* creme background */
+  background-color: #F3E8D0; 
   font-family: Arial, sans-serif;
 }
 
-/* HEADER */
 .header {
   display: flex;
   justify-content: space-between;
@@ -31,7 +28,6 @@ body {
   font-family: "Dancing Script", cursive;
 }
 
-/* NAVIGATION */
 nav {
   display: flex;
   gap: 25px;
@@ -47,7 +43,7 @@ nav a:hover {
   text-decoration: underline;
   color: #0073e6;
 }
-/* Keep your existing .home-photo exactly as-is */
+
 .home-photo {
   max-width: 600px;
   width: 90%;
@@ -55,16 +51,14 @@ nav a:hover {
   border-radius: 0;
 }
 
-/* Photo row stays the same width + size */
 .photo-row {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  gap: 0; /* no gap between photos */
+  gap: 0; 
 }
 
-/* Centered text over BOTH photos */
 .center-text {
   position: absolute;
   top: 50%;
@@ -87,4 +81,12 @@ nav a:hover {
   margin-top: 6px;
   font-weight: 400;
   letter-spacing: 1px;
+}
+
+.quote-container {
+  margin: 40px auto;
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #555;
 }

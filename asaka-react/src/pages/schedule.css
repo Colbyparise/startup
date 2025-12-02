@@ -4,7 +4,6 @@ body {
   margin: 0;
   font-family: 'Garamond', serif;
   background-color: #F9F9F7;
-  background-image: url('AdobeStock_320609690.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   color: #000;
@@ -109,13 +108,11 @@ h2 {
 .welcome-message {
   margin-top: 10px;
 }
-/* Calendar container */
 .calendar-container {
   margin-top: 40px;
   padding: 20px;
 }
 
-/* Month navigation */
 .calendar-header {
   display: flex;
   justify-content: space-between;
@@ -130,7 +127,6 @@ h2 {
   cursor: pointer;
 }
 
-/* Weekday row */
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -139,7 +135,6 @@ h2 {
   margin: 10px 0;
 }
 
-/* Actual calendar grid */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);

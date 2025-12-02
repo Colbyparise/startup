@@ -4,7 +4,6 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #F9F9F7;
-  background-image: url('AdobeStock_320609690.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -13,7 +12,6 @@ body {
   color: #000;
 }
 
-/* ===== Header / Navigation ===== */
 .top-header {
   padding: 15px 0;
   text-align: center;
@@ -46,12 +44,11 @@ nav a:hover {
   color: #FFD700;
 }
 
-/* ===== Main content ===== */
 main {
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  background: transparent; /* remove white box */
+  background: transparent; 
   text-align: center;
 }
 
@@ -61,10 +58,9 @@ h2 {
   font-size: 2rem;
 }
 
-/* ===== Reviews ===== */
 .review {
   margin: 20px 0;
-  background: transparent; /* remove white box */
+  background: transparent; 
   border-radius: 0;
   padding: 0;
   text-align: left;
@@ -86,7 +82,6 @@ h2 {
   margin-bottom: 5px;
 }
 
-/* ===== Footer ===== */
 footer {
   text-align: center;
   padding: 15px;
@@ -94,7 +89,6 @@ footer {
   margin-top: auto;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;

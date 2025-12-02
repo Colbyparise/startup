@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import "./Home.css";
 
 export default function Home() {
+  const [quote, setQuote] = useState("");
+
+  useEffect(() => {
+    fetch("/api/quote")
+      .then((res) => res.json())
+      .then((data) => setQuote(data.content))
+      .catch((err) => console.error("Failed to fetch quote:", err));
+}, []);
+
+
   return (
+
+    
     <div className="home-page">
 
-      {/* ===== Header ===== */}
+      {}
       <header className="header">
         <div className="logo">
           <span className="logo-cursive">Asaka</span> Photos
@@ -28,7 +41,9 @@ export default function Home() {
   <img src="/0M4A3989.jpg" alt="Homephoto" className="home-photo" />
   <img src="/1J5A4634.jpg" alt="Homephoto2" className="home-photo" />
 </main>
-
+    <div className="quote-container">
+        <p>💡 Quote of the Day: {quote ? `"${quote}"` : "Loading..."}</p>
+      </div>
     </div>
   );
 }

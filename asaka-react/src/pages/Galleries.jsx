@@ -5,7 +5,7 @@ export default function Galleries() {
   return (
     <div className="galleries-page">
 
-      {/* ===== Header ===== */}
+      {}
       <header className="top-header">
         <div className="logo">
           <span className="logo-cursive">Asaka</span> Photos
