@@ -32,6 +32,20 @@ export default function Home() {
         </nav>
       </header>
 
+      <div className="github-section" style={{ textAlign: "center", marginTop: "30px" }}>
+        <p style={{ fontSize: "1.1rem" }}>
+          Check out my code at{" "}
+          <a 
+            href="https://github.com/Colbyparise/startup" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ textDecoration: "underline", fontWeight: "bold" }}
+          >
+          </a>
+        </p>
+      </div>
+
+
      <main className="photo-row">
   <div className="center-text">
     <h1>Elegant. Organic. Refined.</h1>
