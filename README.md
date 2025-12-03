@@ -118,11 +118,11 @@ For this deliverable I used JavaScript and React so that the application complet
 
 For this deliverable I implemented backend features to support the frontend functionality.  
 
-- [X] **Node.js/Express HTTP service** - This is done in index.js
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - I built an express backend in index.js(in service folder)
+- [X] **Static middleware for frontend** - This can also be found in the index.js file. 
 - [X] **Calls to third party endpoints** - This is done at the bottom of the home page. Code is found in home.jsx where i fetch https://api.quotable.io/random 
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [X] **Backend service endpoints** -I have backend service endpoints at the end of my index.js file. 
+- [X] **Frontend calls service endpoints** - My frontend calls my backend for api/quote and api/bookings. This can be found in api.js in my frontend service folder. 
 - [X] **Supports registration, login, logout, and restricted endpoint** - This is used in the schedule page and is supported by api.js in src/services and index.js in service.
 
 ## 🚀 DB deliverable
