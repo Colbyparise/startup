@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getBookedDates, submitBooking } from "../services/api";
 import "./Schedule.css";
+import { 
+  getBookedDates, submitBooking,
+  registerUser, loginUser, logoutUser 
+} from "../services/api";
 
 function AvailabilityCalendar({ bookedDates }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -15,7 +18,13 @@ function AvailabilityCalendar({ bookedDates }) {
   for (let i = 0; i < firstDay; i++) calendarCells.push({ blank: true, key: `blank-${i}` });
   for (let day = 1; day <= daysInMonth; day++) {
     const dateString = new Date(year, month, day).toISOString().split("T")[0];
-    calendarCells.push({ blank: false, day, dateString, booked: bookedDates.includes(dateString), key: `day-${day}` });
+    calendarCells.push({
+      blank: false,
+      day,
+      dateString,
+      booked: bookedDates.includes(dateString),
+      key: `day-${day}`
+    });
   }
 
   return (
@@ -54,16 +63,57 @@ export default function Schedule() {
   const [liveMessage, setLiveMessage] = useState(null);
   const [savedName, setSavedName] = useState(localStorage.getItem("userName") || "");
   const [bookedDates, setBookedDates] = useState([]);
-  
 
-  // Live visitor messages
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const randomUser = `Visitor-${Math.floor(Math.random() * 1000)}`;
-      setLiveMessage(`👋 ${randomUser} just viewed the Schedule page`);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const [user, setUser] = useState(null);
+  const [authError, setAuthError] = useState("");
+
+  const [authData, setAuthData] = useState({
+    authName: "",
+    authEmail: "",
+    password: "",
+  });
+
+  function updateAuthField(e) {
+    setAuthData({ ...authData, [e.target.id]: e.target.value });
+  }
+
+  async function handleRegister(e) {
+    e.preventDefault();
+    setAuthError("");
+
+    try {
+      const res = await registerUser({
+        name: authData.authName,
+        email: authData.authEmail,
+        password: authData.password
+      });
+
+      setUser(res.user);
+    } catch (err) {
+      setAuthError("Registration failed.");
+    }
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    setAuthError("");
+
+    try {
+      const res = await loginUser({
+        email: authData.authEmail,
+        password: authData.password
+      });
+
+      setUser(res.user);
+    } catch (err) {
+      setAuthError("Invalid login.");
+    }
+  }
+
+  async function handleLogout() {
+    await logoutUser();
+    setUser(null);
+  };
 
   useEffect(() => {
     async function fetchDates() {
@@ -83,6 +133,10 @@ export default function Schedule() {
 
   async function submitForm(e) {
     e.preventDefault();
+    if (!user) {
+      setStatus("❌ You must be logged in to submit.");
+      return;
+    }
 
     if (formData.name) {
       localStorage.setItem("userName", formData.name);
@@ -95,7 +149,6 @@ export default function Schedule() {
       setBookedDates(response.bookedDates);
       setStatus("Your request has been submitted!");
     } catch (err) {
-      console.error(err);
       setStatus("Failed to submit request.");
     }
   }
@@ -115,17 +168,66 @@ export default function Schedule() {
       <main>
         <h2>Inquire Here</h2>
         <p>Thank you for considering me as your photographer! Expect a response within 1–2 business days.</p>
+
         {liveMessage && <p className="live-message">{liveMessage}</p>}
 
+        {/* AUTH BOX */}
+        {!user ? (
+          <div className="auth-box">
+            <h3>Login or Register</h3>
+
+            {authError && <p className="auth-error">{authError}</p>}
+
+            <input
+              id="authName"
+              placeholder="Name (register only)"
+              value={authData.authName}
+              onChange={updateAuthField}
+            />
+
+            <input
+              id="authEmail"
+              placeholder="Email"
+              value={authData.authEmail}
+              onChange={updateAuthField}
+            />
+
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              value={authData.password}
+              onChange={updateAuthField}
+            />
+
+            <div className="auth-buttons">
+              <button onClick={handleLogin}>Login</button>
+              <button onClick={handleRegister}>Register</button>
+            </div>
+          </div>
+        ) : (
+          <div className="auth-box logged-in">
+            <p>Logged in as <strong>{user.name}</strong></p>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        )}
+
+        {/* MAIN FORM */}
         <form className="schedule-form" onSubmit={submitForm}>
+          {!user && <p className="lock-message">🔒 Please login to submit this form.</p>}
+
           <label htmlFor="name">Full Name *</label>
           <input id="name" value={formData.name} onChange={updateField} required />
+
           <label htmlFor="pname">Partner's Full Name *</label>
           <input id="pname" value={formData.pname} onChange={updateField} required />
+
           <label htmlFor="email">Email *</label>
           <input id="email" type="email" value={formData.email} onChange={updateField} required />
+
           <label htmlFor="phone">Phone Number *</label>
           <input id="phone" value={formData.phone} onChange={updateField} required />
+
           <label htmlFor="insta">Instagram Handle</label>
           <input id="insta" value={formData.insta} onChange={updateField} />
 
@@ -142,23 +244,30 @@ export default function Schedule() {
 
           <label htmlFor="date">Event Date *</label>
           <input id="date" type="date" value={formData.date} onChange={updateField} required />
+
           <label htmlFor="venue">Location & Venue *</label>
           <input id="venue" value={formData.venue} onChange={updateField} required />
+
           <label htmlFor="investment">Photography Investment Range *</label>
           <input id="investment" value={formData.investment} onChange={updateField} required />
+
           <label htmlFor="referral">How did you hear about me? *</label>
           <input id="referral" value={formData.referral} onChange={updateField} required />
+
           <label htmlFor="vision">Mood Board / Inspiration / Vision</label>
           <input id="vision" value={formData.vision} onChange={updateField} />
+
           {formData.type === "other" && (
             <>
               <label htmlFor="other">Other (please specify)</label>
               <input id="other" value={formData.other} onChange={updateField} />
             </>
           )}
+
           <label htmlFor="message">Message</label>
           <textarea id="message" rows="4" value={formData.message} onChange={updateField} />
-          <button type="submit">Submit Request</button>
+
+          <button type="submit" disabled={!user}>Submit Request</button>
         </form>
 
         {status && <p className="status-message">{status}</p>}

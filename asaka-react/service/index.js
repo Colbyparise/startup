@@ -6,6 +6,18 @@ import { v4 as uuidv4 } from "uuid";
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
+function requireAuth(req, res, next) {
+  const userId = req.cookies.session;
+  const user = users.find(u => u.id === userId);
+
+  if (!user) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  req.user = user;
+  next();
+}
+
 
 app.use(express.json());
 app.use(cookieParser());
@@ -43,13 +55,17 @@ app.post("/api/logout", (req, res) => {
   res.json({ success: true });
 });
 
-app.post("/api/book", (req, res) => {
+app.post("/api/book", requireAuth, (req, res) => {
   const { name, date } = req.body;
   if (!name || !date) return res.status(400).json({ error: "Missing fields" });
 
   bookings.push({ id: uuidv4(), name, date });
   const bookedDates = bookings.map(b => b.date);
   res.json({ success: true, bookedDates });
+});
+
+app.get("/api/protected", requireAuth, (req, res) => {
+  res.json({ message: `Hello ${req.user.name}, you accessed a protected route!` });
 });
 
 app.get("/api/bookings", (req, res) => {

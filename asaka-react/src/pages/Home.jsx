@@ -41,6 +41,7 @@ export default function Home() {
             rel="noopener noreferrer"
             style={{ textDecoration: "underline", fontWeight: "bold" }}
           >
+            My Github
           </a>
         </p>
       </div>
