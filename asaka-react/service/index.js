@@ -2,47 +2,64 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
+import { MongoClient } from "mongodb";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const dbConfig = JSON.parse(fs.readFileSync(path.join(__dirname, "dbconfig.json"), "utf8"));
+const uri = `mongodb+srv://${dbConfig.username}:${dbConfig.password}@${dbConfig.hostname}/${dbConfig.database}?retryWrites=true&w=majority&authSource=admin`;
+
+const client = new MongoClient(uri);
+
+await client.connect();
+console.log("Connected to MongoDB!");
+
+const db = client.db(dbConfig.database);
+const Users = db.collection("users");
+const Bookings = db.collection("bookings");
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
-
-function requireAuth(req, res, next) {
-  const userId = req.cookies.session;
-  const user = users.find(u => u.id === userId);
-
-  if (!user) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
-  req.user = user;
-  next();
-}
-
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static("public"));
 
-let users = [];
-let bookings = [];
+async function requireAuth(req, res, next) {
+  const userId = req.cookies.session;
+  if (!userId) return res.status(401).json({ error: "Unauthorized" });
 
-app.post("/api/register", (req, res) => {
+  const user = await Users.findOne({ id: userId });
+  if (!user) return res.status(401).json({ error: "Unauthorized" });
+
+  req.user = user;
+  next();
+}
+
+app.post("/api/register", async (req, res) => {
   const { name, email, password } = req.body;
-  if (!name || !email || !password) return res.status(400).json({ error: "Missing fields" });
+  if (!name || !email || !password)
+    return res.status(400).json({ error: "Missing fields" });
 
-  const existingUser = users.find(u => u.email === email);
-  if (existingUser) return res.status(400).json({ error: "Email already exists" });
+  const existingUser = await Users.findOne({ email });
+  if (existingUser)
+    return res.status(400).json({ error: "Email already exists" });
 
   const hashed = bcrypt.hashSync(password, 8);
   const newUser = { id: uuidv4(), name, email, password: hashed };
-  users.push(newUser);
 
+  await Users.insertOne(newUser);
   res.json({ success: true, user: { id: newUser.id, name: newUser.name } });
 });
 
-app.post("/api/login", (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
-  const user = users.find(u => u.email === email);
+  const user = await Users.findOne({ email });
+
   if (!user || !bcrypt.compareSync(password, user.password))
     return res.status(401).json({ error: "Invalid credentials" });
 
@@ -55,28 +72,28 @@ app.post("/api/logout", (req, res) => {
   res.json({ success: true });
 });
 
-app.post("/api/book", requireAuth, (req, res) => {
+app.post("/api/book", requireAuth, async (req, res) => {
   const { name, date } = req.body;
-  if (!name || !date) return res.status(400).json({ error: "Missing fields" });
+  if (!name || !date)
+    return res.status(400).json({ error: "Missing fields" });
 
-  bookings.push({ id: uuidv4(), name, date });
-  const bookedDates = bookings.map(b => b.date);
+  await Bookings.insertOne({
+    id: uuidv4(),
+    userId: req.user.id,
+    name,
+    date,
+  });
+
+  const allBookings = await Bookings.find().toArray();
+  const bookedDates = allBookings.map((b) => b.date);
+
   res.json({ success: true, bookedDates });
 });
 
-app.get("/api/protected", requireAuth, (req, res) => {
-  res.json({ message: `Hello ${req.user.name}, you accessed a protected route!` });
+app.get("/api/bookings", async (req, res) => {
+  const all = await Bookings.find().toArray();
+  res.json(all.map((b) => b.date));
 });
-
-app.get("/api/bookings", (req, res) => {
-  const bookedDates = bookings.map(b => b.date);
-  res.json(bookedDates);
-});
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 app.get("/api/quote", (req, res) => {
   const quotes = [
@@ -84,17 +101,17 @@ app.get("/api/quote", (req, res) => {
     "Photography is the story I fail to put into words.",
     "A picture is a poem without words.",
     "The best camera is the one you have with you.",
-    "Art is not what you see, but what you make others see."
+    "Art is not what you see, but what you make others see.",
   ];
 
   const random = quotes[Math.floor(Math.random() * quotes.length)];
-
   res.json({ content: random });
 });
 
-app.get(/.*/, (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-
-app.listen(port, () => console.log(`Backend service running on port ${port}`));
+app.listen(port, () =>
+  console.log(`Backend service running on port ${port}`)
+);
