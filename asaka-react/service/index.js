@@ -10,108 +10,129 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dbConfig = JSON.parse(fs.readFileSync(path.join(__dirname, "dbconfig.json"), "utf8"));
-const uri = `mongodb+srv://${dbConfig.username}:${dbConfig.password}@${dbConfig.hostname}/${dbConfig.database}?retryWrites=true&w=majority&authSource=admin`;
+const dbConfig = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "dbconfig.json"), "utf8")
+);
 
-const client = new MongoClient(uri);
+const uri = `mongodb+srv://${dbConfig.username}:${dbConfig.password}@${dbConfig.hostname}/${dbConfig.database}?retryWrites=true&w=majority`;
 
-await client.connect();
-console.log("Connected to MongoDB!");
+const client = new MongoClient(uri, {
+  serverApi: { version: "1", strict: true, deprecationErrors: true },
+});
 
-const db = client.db(dbConfig.database);
-const Users = db.collection("users");
-const Bookings = db.collection("bookings");
+let Users;
+let Bookings;
 
-const app = express();
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+async function startServer() {
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB!");
 
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.static("public"));
+    const db = client.db(dbConfig.database);
+    Users = db.collection("users");
+    Bookings = db.collection("bookings");
 
-async function requireAuth(req, res, next) {
-  const userId = req.cookies.session;
-  if (!userId) return res.status(401).json({ error: "Unauthorized" });
-
-  const user = await Users.findOne({ id: userId });
-  if (!user) return res.status(401).json({ error: "Unauthorized" });
-
-  req.user = user;
-  next();
+    initExpress();
+  } catch (err) {
+    console.error("MongoDB connection FAILED");
+    console.error(err);
+    process.exit(1);
+  }
 }
 
-app.post("/api/register", async (req, res) => {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password)
-    return res.status(400).json({ error: "Missing fields" });
+function initExpress() {
+  const app = express();
+  const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
-  const existingUser = await Users.findOne({ email });
-  if (existingUser)
-    return res.status(400).json({ error: "Email already exists" });
+  app.use(express.json());
+  app.use(cookieParser());
+  app.use(express.static("public"));
 
-  const hashed = bcrypt.hashSync(password, 8);
-  const newUser = { id: uuidv4(), name, email, password: hashed };
 
-  await Users.insertOne(newUser);
-  res.json({ success: true, user: { id: newUser.id, name: newUser.name } });
-});
+  async function requireAuth(req, res, next) {
+    const userId = req.cookies.session;
+    if (!userId) return res.status(401).json({ error: "Unauthorized" });
 
-app.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await Users.findOne({ email });
+    const user = await Users.findOne({ id: userId });
+    if (!user) return res.status(401).json({ error: "Unauthorized" });
 
-  if (!user || !bcrypt.compareSync(password, user.password))
-    return res.status(401).json({ error: "Invalid credentials" });
+    req.user = user;
+    next();
+  }
 
-  res.cookie("session", user.id, { httpOnly: true });
-  res.json({ success: true, user: { id: user.id, name: user.name } });
-});
+  app.post("/api/register", async (req, res) => {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password)
+      return res.status(400).json({ error: "Missing fields" });
 
-app.post("/api/logout", (req, res) => {
-  res.clearCookie("session");
-  res.json({ success: true });
-});
+    const existingUser = await Users.findOne({ email });
+    if (existingUser)
+      return res.status(400).json({ error: "Email already exists" });
 
-app.post("/api/book", requireAuth, async (req, res) => {
-  const { name, date } = req.body;
-  if (!name || !date)
-    return res.status(400).json({ error: "Missing fields" });
+    const hashed = bcrypt.hashSync(password, 8);
+    const newUser = { id: uuidv4(), name, email, password: hashed };
 
-  await Bookings.insertOne({
-    id: uuidv4(),
-    userId: req.user.id,
-    name,
-    date,
+    await Users.insertOne(newUser);
+    res.json({ success: true, user: { id: newUser.id, name: newUser.name } });
   });
 
-  const allBookings = await Bookings.find().toArray();
-  const bookedDates = allBookings.map((b) => b.date);
+  app.post("/api/login", async (req, res) => {
+    const { email, password } = req.body;
 
-  res.json({ success: true, bookedDates });
-});
+    const user = await Users.findOne({ email });
+    if (!user || !bcrypt.compareSync(password, user.password))
+      return res.status(401).json({ error: "Invalid credentials" });
 
-app.get("/api/bookings", async (req, res) => {
-  const all = await Bookings.find().toArray();
-  res.json(all.map((b) => b.date));
-});
+    res.cookie("session", user.id, { httpOnly: true });
+    res.json({ success: true, user: { id: user.id, name: user.name } });
+  });
 
-app.get("/api/quote", (req, res) => {
-  const quotes = [
-    "Creativity takes courage.",
-    "Photography is the story I fail to put into words.",
-    "A picture is a poem without words.",
-    "The best camera is the one you have with you.",
-    "Art is not what you see, but what you make others see.",
-  ];
+  app.post("/api/logout", (req, res) => {
+    res.clearCookie("session");
+    res.json({ success: true });
+  });
 
-  const random = quotes[Math.floor(Math.random() * quotes.length)];
-  res.json({ content: random });
-});
+  app.post("/api/book", requireAuth, async (req, res) => {
+    const { name, date } = req.body;
+    if (!name || !date)
+      return res.status(400).json({ error: "Missing fields" });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+    await Bookings.insertOne({
+      id: uuidv4(),
+      userId: req.user.id,
+      name,
+      date,
+    });
 
-app.listen(port, () =>
-  console.log(`Backend service running on port ${port}`)
-);
+    const allBookings = await Bookings.find().toArray();
+    const bookedDates = allBookings.map((b) => b.date);
+
+    res.json({ success: true, bookedDates });
+  });
+
+  app.get("/api/bookings", async (req, res) => {
+    const all = await Bookings.find().toArray();
+    res.json(all.map((b) => b.date));
+  });
+
+  app.get("/api/quote", (req, res) => {
+    const quotes = [
+      "Creativity takes courage.",
+      "Photography is the story I fail to put into words.",
+      "A picture is a poem without words.",
+      "The best camera is the one you have with you.",
+      "Art is not what you see, but what you make others see.",
+    ];
+
+    const random = quotes[Math.floor(Math.random() * quotes.length)];
+    res.json({ content: random });
+  });
+
+  app.use((req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+  });
+
+  app.listen(port, () => {
+    console.log(`Backend service running on port ${port}`);
+  });
+}
