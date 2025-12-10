@@ -127,11 +127,11 @@ For this deliverable I implemented backend features to support the frontend func
 
 ## 🚀 DB deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I set up MongoDB atlas and I changed code in index.js and dbConfig.json(which I didn't commit bc it has password info). 
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
-
+- [X] **Stores data in MongoDB** - I stored booking requests in MongoDB so that when a user submits a session request, it is saved into the database. 
+- [X] **Stores credentials in MongoDB** - I store and receive user credentials in MongoDB.
+      
 ## 🚀 WebSocket deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
