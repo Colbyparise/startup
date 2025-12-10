@@ -4,15 +4,8 @@ import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 import { MongoClient } from "mongodb";
 import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const dbConfig = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "dbconfig.json"), "utf8")
-);
+const dbConfig = JSON.parse(fs.readFileSync("dbConfig.json", "utf8"));
 
 const uri = `mongodb+srv://${dbConfig.username}:${dbConfig.password}@${dbConfig.hostname}/${dbConfig.database}?retryWrites=true&w=majority`;
 
@@ -42,12 +35,11 @@ async function startServer() {
 
 function initExpress() {
   const app = express();
-  const port = process.argv.length > 2 ? process.argv[2] : 4000;
+  const port = process.argv[2] || 4000;
 
   app.use(express.json());
   app.use(cookieParser());
   app.use(express.static("public"));
-
 
   async function requireAuth(req, res, next) {
     const userId = req.cookies.session;
@@ -128,11 +120,14 @@ function initExpress() {
     res.json({ content: random });
   });
 
+  // Serve the front-end index.html
   app.use((req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+    res.sendFile("index.html", { root: "public" });
   });
 
   app.listen(port, () => {
     console.log(`Backend service running on port ${port}`);
   });
 }
+
+startServer();
