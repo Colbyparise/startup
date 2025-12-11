@@ -4,6 +4,8 @@ import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 import { MongoClient } from "mongodb";
 import fs from "fs";
+import { createServer } from "http";
+import { Server as SocketIOServer } from "socket.io";
 
 const dbConfig = JSON.parse(fs.readFileSync("dbConfig.json", "utf8"));
 
@@ -36,6 +38,19 @@ async function startServer() {
 function initExpress() {
   const app = express();
   const port = process.argv[2] || 4000;
+
+  const httpServer = createServer(app);
+  const io = new SocketIOServer(httpServer, {
+    cors: { origin: "*", methods: ["GET", "POST"] }, // adjust origin for production
+  });
+
+  io.on("connection", (socket) => {
+    console.log(`Socket connected: ${socket.id}`);
+
+    socket.on("disconnect", () => {
+      console.log(`Socket disconnected: ${socket.id}`);
+    });
+  });
 
   app.use(express.json());
   app.use(cookieParser());
@@ -84,20 +99,25 @@ function initExpress() {
     res.json({ success: true });
   });
 
+  // Booking endpoint now emits updates via Socket.io
   app.post("/api/book", requireAuth, async (req, res) => {
     const { name, date } = req.body;
     if (!name || !date)
       return res.status(400).json({ error: "Missing fields" });
 
-    await Bookings.insertOne({
+    const newBooking = {
       id: uuidv4(),
       userId: req.user.id,
       name,
       date,
-    });
+    };
+
+    await Bookings.insertOne(newBooking);
 
     const allBookings = await Bookings.find().toArray();
     const bookedDates = allBookings.map((b) => b.date);
+
+    io.emit("bookingUpdated", bookedDates);
 
     res.json({ success: true, bookedDates });
   });
@@ -120,12 +140,11 @@ function initExpress() {
     res.json({ content: random });
   });
 
-  // Serve the front-end index.html
   app.use((req, res) => {
     res.sendFile("index.html", { root: "public" });
   });
 
-  app.listen(port, () => {
+  httpServer.listen(port, () => {
     console.log(`Backend service running on port ${port}`);
   });
 }

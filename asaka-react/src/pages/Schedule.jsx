@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Schedule.css";
 import { 
   getBookedDates, submitBooking,
-  registerUser, loginUser, logoutUser 
+  registerUser, loginUser, logoutUser, socket, onBookingUpdate
 } from "../services/api";
 
-function AvailabilityCalendar({ bookedDates }) {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
-
+function AvailabilityCalendar({ bookedDates, currentMonth, setCurrentMonth }) {
   const year = currentMonth.getFullYear();
   const month = currentMonth.getMonth();
 
@@ -60,18 +58,13 @@ export default function Schedule() {
   });
 
   const [status, setStatus] = useState("");
-  const [liveMessage, setLiveMessage] = useState(null);
   const [savedName, setSavedName] = useState(localStorage.getItem("userName") || "");
   const [bookedDates, setBookedDates] = useState([]);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const [user, setUser] = useState(null);
   const [authError, setAuthError] = useState("");
-
-  const [authData, setAuthData] = useState({
-    authName: "",
-    authEmail: "",
-    password: "",
-  });
+  const [authData, setAuthData] = useState({ authName: "", authEmail: "", password: "" });
 
   function updateAuthField(e) {
     setAuthData({ ...authData, [e.target.id]: e.target.value });
@@ -80,16 +73,14 @@ export default function Schedule() {
   async function handleRegister(e) {
     e.preventDefault();
     setAuthError("");
-
     try {
       const res = await registerUser({
         name: authData.authName,
         email: authData.authEmail,
         password: authData.password
       });
-
       setUser(res.user);
-    } catch (err) {
+    } catch {
       setAuthError("Registration failed.");
     }
   }
@@ -97,15 +88,10 @@ export default function Schedule() {
   async function handleLogin(e) {
     e.preventDefault();
     setAuthError("");
-
     try {
-      const res = await loginUser({
-        email: authData.authEmail,
-        password: authData.password
-      });
-
+      const res = await loginUser({ email: authData.authEmail, password: authData.password });
       setUser(res.user);
-    } catch (err) {
+    } catch {
       setAuthError("Invalid login.");
     }
   }
@@ -113,7 +99,7 @@ export default function Schedule() {
   async function handleLogout() {
     await logoutUser();
     setUser(null);
-  };
+  }
 
   useEffect(() => {
     async function fetchDates() {
@@ -125,6 +111,13 @@ export default function Schedule() {
       }
     }
     fetchDates();
+
+    // Listen for real-time updates via socket
+    onBookingUpdate((updatedDates) => {
+      setBookedDates(updatedDates);
+    });
+
+    return () => socket.off("bookingUpdated");
   }, []);
 
   function updateField(e) {
@@ -137,7 +130,6 @@ export default function Schedule() {
       setStatus("❌ You must be logged in to submit.");
       return;
     }
-
     if (formData.name) {
       localStorage.setItem("userName", formData.name);
       setSavedName(formData.name);
@@ -148,7 +140,7 @@ export default function Schedule() {
       const response = await submitBooking(formData);
       setBookedDates(response.bookedDates);
       setStatus("Your request has been submitted!");
-    } catch (err) {
+    } catch {
       setStatus("Failed to submit request.");
     }
   }
@@ -169,37 +161,14 @@ export default function Schedule() {
         <h2>Inquire Here</h2>
         <p>Thank you for considering me as your photographer! Expect a response within 1–2 business days.</p>
 
-        {liveMessage && <p className="live-message">{liveMessage}</p>}
-
         {/* AUTH BOX */}
         {!user ? (
           <div className="auth-box">
             <h3>Login or Register</h3>
-
             {authError && <p className="auth-error">{authError}</p>}
-
-            <input
-              id="authName"
-              placeholder="Name (register only)"
-              value={authData.authName}
-              onChange={updateAuthField}
-            />
-
-            <input
-              id="authEmail"
-              placeholder="Email"
-              value={authData.authEmail}
-              onChange={updateAuthField}
-            />
-
-            <input
-              id="password"
-              type="password"
-              placeholder="Password"
-              value={authData.password}
-              onChange={updateAuthField}
-            />
-
+            <input id="authName" placeholder="Name (register only)" value={authData.authName} onChange={updateAuthField} />
+            <input id="authEmail" placeholder="Email" value={authData.authEmail} onChange={updateAuthField} />
+            <input id="password" type="password" placeholder="Password" value={authData.password} onChange={updateAuthField} />
             <div className="auth-buttons">
               <button onClick={handleLogin}>Login</button>
               <button onClick={handleRegister}>Register</button>
@@ -218,19 +187,14 @@ export default function Schedule() {
 
           <label htmlFor="name">Full Name *</label>
           <input id="name" value={formData.name} onChange={updateField} required />
-
           <label htmlFor="pname">Partner's Full Name *</label>
           <input id="pname" value={formData.pname} onChange={updateField} required />
-
           <label htmlFor="email">Email *</label>
           <input id="email" type="email" value={formData.email} onChange={updateField} required />
-
           <label htmlFor="phone">Phone Number *</label>
           <input id="phone" value={formData.phone} onChange={updateField} required />
-
           <label htmlFor="insta">Instagram Handle</label>
           <input id="insta" value={formData.insta} onChange={updateField} />
-
           <label htmlFor="type">Session Type *</label>
           <select id="type" value={formData.type} onChange={updateField} required>
             <option value="">Select...</option>
@@ -244,16 +208,12 @@ export default function Schedule() {
 
           <label htmlFor="date">Event Date *</label>
           <input id="date" type="date" value={formData.date} onChange={updateField} required />
-
           <label htmlFor="venue">Location & Venue *</label>
           <input id="venue" value={formData.venue} onChange={updateField} required />
-
           <label htmlFor="investment">Photography Investment Range *</label>
           <input id="investment" value={formData.investment} onChange={updateField} required />
-
           <label htmlFor="referral">How did you hear about me? *</label>
           <input id="referral" value={formData.referral} onChange={updateField} required />
-
           <label htmlFor="vision">Mood Board / Inspiration / Vision</label>
           <input id="vision" value={formData.vision} onChange={updateField} />
 
@@ -273,7 +233,7 @@ export default function Schedule() {
         {status && <p className="status-message">{status}</p>}
         {savedName && <p className="welcome-message">Welcome back, <strong>{savedName}</strong>!</p>}
 
-        <AvailabilityCalendar bookedDates={bookedDates} />
+        <AvailabilityCalendar bookedDates={bookedDates} currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />
       </main>
     </div>
   );
