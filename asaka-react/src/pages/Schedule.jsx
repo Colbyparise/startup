@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Schedule.css";
+//frontend makes Websocket connections
 import { 
   getBookedDates, submitBooking,
   registerUser, loginUser, logoutUser, socket, onBookingUpdate
@@ -112,7 +113,7 @@ export default function Schedule() {
     }
     fetchDates();
 
-    // Listen for real-time updates via socket
+    // Websocket data displayed in the UI
     onBookingUpdate((updatedDates) => {
       setBookedDates(updatedDates);
     });

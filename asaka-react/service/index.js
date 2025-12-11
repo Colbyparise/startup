@@ -44,6 +44,7 @@ function initExpress() {
     cors: { origin: "*", methods: ["GET", "POST"] }, // adjust origin for production
   });
 
+  //backend listens for WebSocket Connections
   io.on("connection", (socket) => {
     console.log(`Socket connected: ${socket.id}`);
 
@@ -117,6 +118,7 @@ function initExpress() {
     const allBookings = await Bookings.find().toArray();
     const bookedDates = allBookings.map((b) => b.date);
 
+    //data is sent over Websocket
     io.emit("bookingUpdated", bookedDates);
 
     res.json({ success: true, bookedDates });
