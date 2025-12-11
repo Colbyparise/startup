@@ -134,14 +134,10 @@ For this deliverable I set up MongoDB atlas and I changed code in index.js and d
       
 ## 🚀 WebSocket deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I added websockets that listen and 
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
+- [X] **Backend listens for WebSocket connection** - This connection can be found in my service/index.js file. I used Socket.io to allow my backend to listen for websocket connections.
+- [X] **Frontend makes WebSocket connection** - This can be found in my api.js file. I imported socket on Schedule.jsx and my api.js connects the browser to the backend. This allows for frontend websocket connection. 
 - [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
-
-
-- [ ] **Practice** 
-"hello world" 
+- [X] **Application is fully functional** - My website is up and running, and does not have any issues when I use it. 
