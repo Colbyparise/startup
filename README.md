@@ -134,10 +134,10 @@ For this deliverable I set up MongoDB atlas and I changed code in index.js and d
       
 ## 🚀 WebSocket deliverable
 
-For this deliverable I added websockets that listen and 
+For this deliverable I added websockets.
 
 - [X] **Backend listens for WebSocket connection** - This connection can be found in my service/index.js file. I used Socket.io to allow my backend to listen for websocket connections.
 - [X] **Frontend makes WebSocket connection** - This can be found in my api.js file. I imported socket on Schedule.jsx and my api.js connects the browser to the backend. This allows for frontend websocket connection. 
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
+- [X] **Data sent over WebSocket connection** - On the backend, after i save a booking i use io.emit("bookingUpdated", bookedDates) so that data is being sent over websocket.
+- [X] **WebSocket data displayed** - My websocket data is displayed in the calendar. The calendar renders automatically with red booked dates.
 - [X] **Application is fully functional** - My website is up and running, and does not have any issues when I use it. 
